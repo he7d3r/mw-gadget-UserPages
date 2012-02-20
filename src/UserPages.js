@@ -8,7 +8,7 @@ if ( $.inArray( mw.config.get( 'wgNamespaceNumber' ), [ 2, 3 ]) > -1
 		// Add a link to list the scripts of the current user
 		mw.util.addPortletLink(
 			'p-namespaces',
-			mw.util.wikiGetlink( 'Special:Search/intitle:js prefix:User:' + mw.config.get( 'wgTitle' ).split('/')[0] + '?limit=500'),
+			mw.util.wikiGetlink( 'Special:Search/intitle:js prefix:User:' + mw.config.get( 'wgTitle' ).split('/')[0]) + '?limit=500',
 			'JS',
 			'ca-user-js',
 			'Pesquisar scripts deste editor'
