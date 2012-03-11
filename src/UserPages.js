@@ -1,3 +1,4 @@
+var user = mw.config.get( 'wgTitle' ).split('/')[0];
 function processUserTools ( data ) {
 	var list = (data && data.query && data.query.search) || [];
 	if( list.length === 0 ){
@@ -20,8 +21,7 @@ function processUserTools ( data ) {
 }
 
 function getUserTools(){
-	var	api = new mw.Api(),
-		user = mw.config.get( 'wgTitle' ).split('/')[0];
+	var	api = new mw.Api();
 	api.get( {
 		action: 'query',
 		list: 'search',
