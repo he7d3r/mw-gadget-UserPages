@@ -1,3 +1,24 @@
+function processUserTools ( data ) {
+	var list = (data && data.query && data.query.search) || [];
+	if( list.length === 0 ){
+		$('#js-info').find('a').text( 'Este editor não possui páginas de JS nem CSS' );
+		return;
+	} else {
+		$('#js-info').remove();
+	}
+	list.sort( function(a,b){
+		return (new Date(b.timestamp) - new Date(a.timestamp) );
+	});
+	$.each( data && data.query && data.query.search, function( id, result ){
+		// Add a link to list the scripts of the current user
+		mw.util.addPortletLink(
+			'p-js-list',
+			mw.util.wikiGetlink( result.title ),
+			result.title.replace( new RegExp( '^.+?' + user + '\\/' ), '' )
+		);
+	} );
+}
+
 function getUserTools(){
 	var	api = new mw.Api(),
 		user = mw.config.get( 'wgTitle' ).split('/')[0];
@@ -9,24 +30,7 @@ function getUserTools(){
 		srprop: 'timestamp',
 		srlimit: 50 // Maximum allowed for 'users'
 	}, {
-		ok: function ( data ) {
-			var list = (data && data.query && data.query.search) || [];
-			if( list.length === 0 ){
-				$('#js-info').find('a').text( 'Este editor não possui páginas de JS nem CSS' );
-				return;
-			}
-			list.sort( function(a,b){
-				return (new Date(b.timestamp) - new Date(a.timestamp) );
-			});
-			$.each( data && data.query && data.query.search, function( id, result ){
-				// Add a link to list the scripts of the current user
-				mw.util.addPortletLink(
-					'p-js-list',
-					mw.util.wikiGetlink( result.title ),
-					result.title.replace( new RegExp( '^.+?' + user + '\\/' ), '' )
-				);
-			} );
-		}
+		ok: processUserTools
 	} );
 }
 
