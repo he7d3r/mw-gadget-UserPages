@@ -14,7 +14,7 @@ function processUserTools ( data ) {
 		// Add a link to list the scripts of the current user
 		mw.util.addPortletLink(
 			'p-js-list',
-			mw.util.wikiGetlink( result.title ),
+			mw.util.wikiGetlink( result.title ) + '?diff=0',
 			result.title.replace( new RegExp( '^.+?' + user + '\\/' ), '' )
 		);
 	} );
