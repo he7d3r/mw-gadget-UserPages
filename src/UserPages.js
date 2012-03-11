@@ -7,10 +7,14 @@ function getUserTools(){
 		srsearch: '(intitle:.js OR intitle:.css) prefix:User:' + user,
 		srnamespace: 2,
 		srprop: 'timestamp',
-		srlimit: 100
+		srlimit: 50 // Maximum allowed for 'users'
 	}, {
 		ok: function ( data ) {
 			var list = (data && data.query && data.query.search) || [];
+			if( list.length === 0 ){
+				$('#js-info').find('a').text( 'Este editor não possui páginas de JS nem CSS' );
+				return;
+			}
 			list.sort( function(a,b){
 				return (new Date(b.timestamp) - new Date(a.timestamp) );
 			});
@@ -43,7 +47,8 @@ if ( $.inArray( mw.config.get( 'wgNamespaceNumber' ), [ 2, 3 ]) > -1
 		$(mw.util.addPortletLink(
 			'p-js-list',
 			'#',
-			'Obter lista...'
+			'Obter lista...',
+			'js-info'
 		) ).click( function( e ){
 			e.preventDefault();
 			mw.loader.using( 'mediawiki.api', getUserTools);
