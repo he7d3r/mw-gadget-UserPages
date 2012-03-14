@@ -62,7 +62,7 @@ if ( $.inArray( mw.config.get( 'wgNamespaceNumber' ), [ 2, 3 ]) > -1
 			'#',
 			'Obter lista...',
 			'js-info'
-		) ).add('#p-js-list').click( function( e ){
+		) ).add('#p-js-list h4, #p-js-list h5').click( function( e ){
 			e.preventDefault();
 			mw.loader.using( 'mediawiki.api', getUserTools);
 		});
