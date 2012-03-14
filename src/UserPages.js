@@ -1,9 +1,15 @@
+/**
+ * Customize user pages
+ * @author: [[User:Helder.wiki]]
+ * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/UserPages.js]] ([[File:User:Helder.wiki/Tools/UserPages.js]])
+ */
 /*global $, mw, processUserTools, user*/
 /*jslint white: true */
 (function(){
 'use strict';
 
-var user = mw.config.get( 'wgTitle' ).split('/')[0];
+var	user = mw.config.get( 'wgTitle' ).split('/')[0],
+	alreadyRunning = false;
 function processUserTools ( data ) {
 	var list = (data && data.query && data.query.search) || [];
 	if( list.length === 0 ){
@@ -31,6 +37,10 @@ function processUserTools ( data ) {
 
 function getUserTools(){
 	var api = new mw.Api();
+	if( alreadyRunning ) {
+		return;
+	}
+	alreadyRunning = true;
 	api.get( {
 		action: 'query',
 		list: 'search',
