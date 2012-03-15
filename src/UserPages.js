@@ -12,12 +12,14 @@ var	user = mw.config.get( 'wgTitle' ).split('/')[0],
 	alreadyRunning = false;
 function processUserTools ( data ) {
 	var	pages = (data && data.query && data.query.pages) || {},
+		base = 'User:' + user + '/',
+		userRegex = new RegExp( '^.+?' + user + '\\/' ),
 		list = [];
 	/*jslint unparam: true*/
 	$.each( pages, function( pageid, page ){
 		if( /\.(j|cs)s$/g.test( page.title ) ){
 			list.push( [
-				page.title.replace( new RegExp( '^.+?' + user + '\\/' ), '' ),
+				page.title.replace( userRegex, '' ),
 				Date.parse( page.revisions[0].timestamp )
 			] );
 		}
@@ -36,7 +38,7 @@ function processUserTools ( data ) {
 		// Add a link to list the scripts of the current user
 		var $link = $(mw.util.addPortletLink(
 			'p-js-list',
-			mw.util.wikiGetlink( 'User:' + user + page[0] ) + '?diff=0',
+			mw.util.wikiGetlink( base + page[0] ) + '?diff=0',
 			page[0]
 		));
 		if ( ( ( new Date() ).getTime() - page[1] ) / 86400000 > 7 ){
