@@ -13,6 +13,7 @@ var	user = mw.config.get( 'wgTitle' ).split('/')[0],
 function processUserTools ( data ) {
 	var	pages = (data && data.query && data.query.pages) || {},
 		list = [];
+	/*jslint unparam: true*/
 	$.each( pages, function( pageid, page ){
 		if( /\.(j|cs)s$/g.test( page.title ) ){
 			list.push( [
@@ -21,6 +22,7 @@ function processUserTools ( data ) {
 			] );
 		}
 	});
+	/*jslint unparam: false*/
 	if( list.length === 0 ){
 		$('#js-info').find('a').text( 'Este editor não possui páginas de JS nem CSS' );
 		return;
@@ -57,7 +59,7 @@ function getUserTools(){
 		generator: 'allpages',
 		gapprefix: user,
 		gapnamespace: 2,
-		gaplimit: 500
+		gaplimit: 500,
 		gapminsize: 1 // Avoid blank subpages
 	}, {
 		ok: processUserTools
