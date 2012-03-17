@@ -3,9 +3,9 @@
  * @author: [[User:Helder.wiki]]
  * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/UserPages.js]] ([[File:User:Helder.wiki/Tools/UserPages.js]])
  */
-/*global $, mw, processUserTools, user*/
-/*jslint white: true */
-(function(){
+/*jslint browser: true, white: true*/
+/*global jQuery, mediaWiki */
+( function ( $, mw /* , undefined */ ) {
 'use strict';
 
 var	user = mw.config.get( 'wgTitle' ).split('/')[0],
@@ -105,4 +105,5 @@ if ( $.inArray( mw.config.get( 'wgNamespaceNumber' ), [ 2, 3 ]) > -1
 		}
 	});
 }
-}());
+
+}( jQuery, mediaWiki ) );
