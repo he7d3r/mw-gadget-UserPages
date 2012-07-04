@@ -5,13 +5,13 @@
  */
 /*jslint browser: true, white: true*/
 /*global jQuery, mediaWiki */
-( function ( $, mw /* , undefined */ ) {
+( function ( $, mw ) {
 'use strict';
 
 var	user = mw.config.get( 'wgTitle' ).split('/')[0],
 	alreadyRunning = false;
 function processUserTools ( data ) {
-	var	pages = (data && data.query && data.query.pages) || {},
+	var	pages = (data.query && data.query.pages) || {},
 		userRegex = new RegExp( '^.+?' + user + '\\/' ),
 		list = [];
 	/*jslint unparam: true*/
@@ -54,7 +54,6 @@ function getUserTools(){
 	}
 	alreadyRunning = true;
 	api.get( {
-		action: 'query',
 		prop: 'revisions',
 		rvprop: 'timestamp|size',
 		generator: 'allpages',
