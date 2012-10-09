@@ -8,11 +8,10 @@
 ( function ( mw, $ ) {
 'use strict';
 
-var user = mw.config.get( 'wgTitle' ).split('/')[0],
-	alreadyRunning = false;
+var user = mw.config.get( 'wgTitle' ).split('/')[0];
 function processUserTools ( data ) {
 	var	pages = (data.query && data.query.pages) || {},
-		userRegex = new RegExp( '^.+?' + user + '\\/' ),
+		userRegex = new RegExp( '^.+?' + $.escapeRE( user ) + '\\/' ),
 		list = [];
 	/*jslint unparam: true*/
 	$.each( pages, function( pageid, page ){
@@ -25,7 +24,8 @@ function processUserTools ( data ) {
 	});
 	/*jslint unparam: false*/
 	if( list.length === 0 ){
-		$('#js-info').find('a').text( 'Este editor não possui páginas de JS nem CSS' );
+		$('#js-info').find('a')
+			.text( 'Este editor não possui páginas de JS nem CSS' );
 		return;
 	}
 	$('#js-info').remove();
@@ -49,10 +49,6 @@ function processUserTools ( data ) {
 
 function getUserTools(){
 	var api = new mw.Api();
-	if( alreadyRunning ) {
-		return;
-	}
-	alreadyRunning = true;
 	api.get( {
 		prop: 'revisions',
 		rvprop: 'timestamp|size',
@@ -67,18 +63,22 @@ function getUserTools(){
 
 function customizeUserPage() {
 	// Create a new portlet for user scripts
-	$('#p-cactions').clone().prepend('<h4>JS</h4>')
-	.insertAfter('#p-namespaces').attr({
-		'id': 'p-js-list',
-		'class': 'vectorMenu emptyPortlet'
-	}).find('li').remove().end().find('span').text('JS List');
+	$('#p-cactions').clone()
+		.prepend('<h4>JS</h4>')
+		.insertAfter('#p-namespaces').attr({
+			'id': 'p-js-list',
+			'class': 'vectorMenu emptyPortlet'
+		}).find('li')
+			.remove().end()
+			.find('span').text('JS List');
+
 	// Add a link to list the scripts of the current user
 	$(mw.util.addPortletLink(
 		'p-js-list',
 		'#',
 		'Obter lista...',
 		'js-info'
-	) ).add('#p-js-list h4, #p-js-list h5').click( function( e ){
+	) ).add('#p-js-list h4, #p-js-list h5').one( 'click', function( e ){
 		e.preventDefault();
 		mw.loader.using( 'mediawiki.api', getUserTools);
 	});
