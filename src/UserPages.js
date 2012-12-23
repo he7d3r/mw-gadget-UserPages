@@ -10,7 +10,7 @@
 
 var user = mw.config.get( 'wgTitle' ).split('/')[0];
 function processUserTools ( data ) {
-	var	pages = (data.query && data.query.pages) || {},
+	var pages = (data.query && data.query.pages) || {},
 		userRegex = new RegExp( '^.+?' + $.escapeRE( user ) + '\\/' ),
 		list = [];
 	/*jslint unparam: true*/
@@ -64,7 +64,7 @@ function getUserTools(){
 function customizeUserPage() {
 	// Create a new portlet for user scripts
 	$('#p-cactions').clone()
-		.prepend('<h4>JS</h4>')
+		.prepend('<h3>JS</h3>')
 		.insertAfter('#p-namespaces').attr({
 			'id': 'p-js-list',
 			'class': 'vectorMenu emptyPortlet'
@@ -78,7 +78,7 @@ function customizeUserPage() {
 		'#',
 		'Obter lista...',
 		'js-info'
-	) ).add('#p-js-list h4, #p-js-list h5').one( 'click', function( e ){
+	) ).add('#p-js-list h3').one( 'click', function( e ){
 		e.preventDefault();
 		mw.loader.using( 'mediawiki.api', getUserTools);
 	});
