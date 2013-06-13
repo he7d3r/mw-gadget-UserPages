@@ -48,8 +48,7 @@ function processUserTools ( data ) {
 }
 
 function getUserTools(){
-	var api = new mw.Api();
-	api.get( {
+	( new mw.Api() ).get( {
 		prop: 'revisions',
 		rvprop: 'timestamp|size',
 		generator: 'allpages',
