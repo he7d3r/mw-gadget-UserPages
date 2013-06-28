@@ -3,8 +3,8 @@
  * @author: [[User:Helder.wiki]]
  * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/UserPages.js]] ([[File:User:Helder.wiki/Tools/UserPages.js]])
  */
-/*jslint browser: true, white: true*/
-/*global mediaWiki, jQuery */
+/*jshint browser: true, camelcase: true, curly: true, eqeqeq: true, immed: true, latedef: true, newcap: true, noarg: true, noempty: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, trailing: true, maxlen: 120, evil: true, laxbreak:true, onevar: true */
+/*global jQuery, mediaWiki */
 ( function ( mw, $ ) {
 'use strict';
 
@@ -74,7 +74,7 @@ function customizeUserPage() {
 					'font-weight': 'normal',
 					'border': 'none'
 				})
-		 )
+		)
 		.insertAfter('#p-namespaces')
 		.attr({
 			'id': 'p-js-list',
