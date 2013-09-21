@@ -37,7 +37,7 @@ function processUserTools ( data ) {
 		// Add a link to list the scripts of the current user
 		var $item = $(mw.util.addPortletLink(
 			'p-js-list',
-			mw.util.wikiGetlink( page[0] ) + '?diff=0',
+			mw.util.wikiGetlink( page[0], { diff: 0 } ),
 			page[0].replace( userRegex, '' )
 		));
 		if ( ( ( new Date() ).getTime() - page[1] ) / 86400000 > 7 ){
