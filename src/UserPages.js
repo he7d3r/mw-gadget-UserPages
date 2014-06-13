@@ -63,18 +63,6 @@ function getUserTools(){
 function customizeUserPage() {
 	// Create a new portlet for user scripts
 	$('#p-cactions').clone()
-		.prepend(
-			$('<h3>JS</h3>')
-				.css({
-					'display': 'inline-block',
-					'float': 'left',
-					'font-size': '0.8em',
-					'padding-left': '0.5em',
-					'padding-top': '1.375em',
-					'font-weight': 'normal',
-					'border': 'none'
-				})
-		)
 		.insertAfter('#p-namespaces')
 		.attr({
 			'id': 'p-js-list',
@@ -83,7 +71,7 @@ function customizeUserPage() {
 			.remove()
 			.end()
 		.find('span')
-			.text('JS List');
+			.text('JS');
 	// Add a link to list the scripts of the current user
 	$(mw.util.addPortletLink(
 		'p-js-list',
