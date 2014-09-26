@@ -3,8 +3,6 @@
  * @author: Helder (https://github.com/he7d3r)
  * @license: CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0/>
  */
-/*jshint browser: true, camelcase: true, curly: true, eqeqeq: true, immed: true, latedef: true, newcap: true, noarg: true, noempty: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, trailing: true, maxlen: 120, evil: true, laxbreak:true, onevar: true */
-/*global jQuery, mediaWiki */
 ( function ( mw, $ ) {
 'use strict';
 
@@ -13,7 +11,7 @@ function processUserTools ( data ) {
 	var pages = (data.query && data.query.pages) || {},
 		userRegex = new RegExp( '^.+?' + $.escapeRE( user ) + '\\/' ),
 		list = [];
-	/*jslint unparam: true*/
+	/*jshint unused:false */
 	$.each( pages, function( pageid, page ){
 		if( /\.(j|cs)s$/g.test( page.title ) ){
 			list.push( [
@@ -22,7 +20,7 @@ function processUserTools ( data ) {
 			] );
 		}
 	});
-	/*jslint unparam: false*/
+	/*jshint unused:true */
 	if( list.length === 0 ){
 		$('#js-info').find('a')
 			.text( 'Este editor não possui páginas de JS nem CSS' );
@@ -32,7 +30,7 @@ function processUserTools ( data ) {
 	list.sort( function(a,b){
 		return b[1] - a[1];
 	});
-	/*jslint unparam: true*/
+	/*jshint unused:false */
 	$.each( list, function( id, page ){
 		// Add a link to list the scripts of the current user
 		var $item = $(mw.util.addPortletLink(
@@ -44,7 +42,7 @@ function processUserTools ( data ) {
 			$item.find('a').css('color', 'gray');
 		}
 	} );
-	/*jslint unparam: false*/
+	/*jshint unused:true */
 }
 
 function getUserTools(){
