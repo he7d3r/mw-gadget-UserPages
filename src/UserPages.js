@@ -9,7 +9,7 @@
 	var user = mw.config.get( 'wgTitle' ).split('/')[0];
 	function processUserTools( data ) {
 		var pages = (data.query && data.query.pages) || {},
-			userRegex = new RegExp( '^.+?' + $.escapeRE( user ) + '\\/' ),
+			userRegex = new RegExp( '^.+?' + mw.RegExp.escape( user ) + '\\/' ),
 			list = [];
 		/*jshint unused:false */
 		$.each( pages, function ( pageid, page ) {
@@ -78,7 +78,7 @@
 			'js-info'
 		) ).add('#p-js-list h3').one( 'click', function ( e ) {
 			e.preventDefault();
-			mw.loader.using( 'mediawiki.api', getUserTools);
+			mw.loader.using( [ 'mediawiki.api', 'mediawiki.RegExp' ], getUserTools);
 		});
 
 		if ( mw.config.get( 'wgTitle' ).indexOf( mw.config.get( 'wgUserName' ) ) === -1 ) {
