@@ -60,16 +60,17 @@
 
 	function customizeUserPage() {
 		// Create a new portlet for user scripts
-		$('#p-cactions').clone()
-			.insertAfter('#p-namespaces')
-			.attr({
-				'id': 'p-js-list',
-				'class': 'vectorMenu emptyPortlet'
-			}).find('li')
-				.remove()
-				.end()
-			.find('span')
-				.text('JS');
+		$('#p-variants').after(
+			$('#p-cactions')
+				.clone()
+				.attr('id', 'p-js-list')
+				.find('ul')
+					.empty()
+					.end()
+				.find('span')
+					.text('JS')
+					.end()
+		);
 		// Add a link to list the scripts of the current user
 		$(mw.util.addPortletLink(
 			'p-js-list',
